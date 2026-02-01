@@ -88,7 +88,6 @@ export function CodeBlock({ children, ...props }: CodeBlockProps) {
           className={cn(
             "text-primary border-border absolute right-3 size-8 cursor-pointer rounded-md border opacity-100 shadow-none transition-opacity lg:opacity-0 lg:group-hover:opacity-100",
             title ? "top-13" : "top-3",
-            props.className,
           )}
           aria-label="Copy code"
         >

@@ -13,6 +13,7 @@ const posts = defineCollection({
     title: z.string(),
     excerpt: z.string(),
     publishedAt: z.string(),
+    content: z.string(),
     thumbnail: z
       .object({
         src: z.string(),

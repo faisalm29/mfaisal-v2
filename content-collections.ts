@@ -2,6 +2,8 @@ import { defineCollection, defineConfig } from "@content-collections/core";
 import { compileMDX } from "@content-collections/mdx";
 import { z } from "zod";
 import readingTime from "reading-time";
+import remarkGfm from "remark-gfm";
+import { remarkCodeMeta } from "@/lib/remark-code-meta";
 
 const posts = defineCollection({
   name: "blog",
@@ -11,6 +13,7 @@ const posts = defineCollection({
     title: z.string(),
     excerpt: z.string(),
     publishedAt: z.string(),
+    content: z.string(),
     thumbnail: z
       .object({
         src: z.string(),
@@ -19,7 +22,9 @@ const posts = defineCollection({
       .optional(),
   }),
   transform: async (document, context) => {
-    const mdx = await compileMDX(context, document);
+    const mdx = await compileMDX(context, document, {
+      remarkPlugins: [remarkGfm, remarkCodeMeta],
+    });
     const slug = document._meta.fileName.replace(/\.mdx$/, "");
     const readTime = readingTime(document.content).text;
     return {

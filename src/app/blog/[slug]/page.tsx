@@ -21,7 +21,7 @@ export default async function Page({
   if (!post) return notFound();
 
   return (
-    <article className="prose">
+    <article className="">
       <h1 className="font-thin">{post.title}</h1>
       <time>{post.publishedAt}</time>
       <p>{post.readTime}</p>

@@ -1,8 +1,33 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { Navbar } from "@/components/Navbar";
+import { Header } from "@/components/Header";
+import Background from "@/components/Background";
+import localFont from "next/font/local";
+import { Bricolage_Grotesque } from "next/font/google";
 // @ts-ignore
 import "./globals.css";
+
+const newsreader = localFont({
+  src: [
+    {
+      path: "./fonts/Newsreader-Regular.woff2",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Newsreader-Italic.woff2",
+      style: "italic",
+    },
+  ],
+  variable: "--font-newsreader",
+});
+
+const bricolagueGrotesk = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-bricolague-grotesk",
+  axes: ["opsz", "wdth"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,8 +41,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${GeistSans.variable} ${GeistMono.variable}`}>
-        {children}
+      <body
+        className={`${GeistSans.variable} ${GeistMono.variable} ${newsreader.variable} ${bricolagueGrotesk.variable}`}
+      >
+        <div className="relative min-h-screen w-full">
+          <div className="fixed inset-0 -z-10 opacity-75">
+            <Background />
+          </div>
+
+          <div className="relative z-10 container mx-auto min-h-screen max-w-2xl px-6 py-12 sm:py-24">
+            <Header />
+            {children}
+            <Navbar />
+          </div>
+        </div>
       </body>
     </html>
   );

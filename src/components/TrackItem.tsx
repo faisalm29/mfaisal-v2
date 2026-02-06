@@ -24,13 +24,17 @@ const TrackItem = ({ number, ...track }: TrackItemProps) => {
       <div className="flex w-full items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <div className="size-10 shrink-0 items-center justify-center overflow-hidden rounded-sm">
-            <Image
-              src={albumCover?.url ?? ""}
-              alt={`${name} album's cover`}
-              width={albumCover?.width ?? 0}
-              height={albumCover?.height ?? 0}
-              className="size-full object-cover"
-            />
+            {albumCover ? (
+              <Image
+                src={albumCover.url}
+                alt={`${name} album's cover`}
+                width={albumCover.width}
+                height={albumCover.height}
+                className="size-full object-cover"
+              />
+            ) : (
+              <div className="bg-muted-foreground size-full" />
+            )}
           </div>
           <div className="flex min-w-0 flex-col gap-1 text-balance">
             <h1 className="line-clamp-1">{name}</h1>

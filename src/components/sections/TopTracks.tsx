@@ -67,7 +67,6 @@ const music = [
 
 const TopTracks = async () => {
   const topTracks = await getTopTracks();
-  const {} = topTracks;
   return (
     <SectionContainer>
       <div>

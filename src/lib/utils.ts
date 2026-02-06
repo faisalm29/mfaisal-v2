@@ -23,7 +23,7 @@ export const sortPosts = (posts: GeneralPost[]) => {
 
 export const convertMsToMinutes = (ms: number) => {
   const minutes = Math.floor(ms / 60_000);
-  const seconds = ((ms % 60_000) / 1_000).toFixed(0);
+  const seconds = Math.floor((ms % 60_000) / 1_000);
 
-  return `${minutes}:${Number(seconds) < 10 ? "0" : ""}${seconds}`;
+  return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 };

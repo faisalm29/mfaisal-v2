@@ -1,8 +1,10 @@
+import { SpotifyTopTracksResponse, TopTrack } from "./spotify.types";
+
 const clientId = process.env.SPOTIFY_CLIENT_ID;
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN;
 
-async function getAccessToken() {
+export async function getAccessToken() {
   if (!clientId || !clientSecret || !refreshToken) {
     throw new Error("Missing Spotify environment variables");
   }
@@ -32,23 +34,7 @@ async function getAccessToken() {
   return data.access_token;
 }
 
-export async function getTopTracks(): Promise<
-  Array<{
-    url: string;
-    name: string;
-    artists: Array<{
-      name: string;
-    }>;
-    album: {
-      image: {
-        url: string;
-        width: number;
-        height: number;
-      };
-      name: string;
-    };
-  }>
-> {
+export async function getTopTracks(): Promise<TopTrack[]> {
   const accessToken = await getAccessToken();
 
   const response = await fetch(
@@ -66,21 +52,13 @@ export async function getTopTracks(): Promise<
     throw new Error("Failed to fetch top tracks");
   }
 
-  const { items } = await response.json();
+  const data: SpotifyTopTracksResponse = await response.json();
 
-  const tracks = items.map((track: Spotify.Track) => ({
+  return data.items.map((track) => ({
     url: track.external_urls.spotify,
     name: track.name,
     artists: track.artists,
-    album: {
-      image: {
-        url: track.album.images.at(-1)?.url ?? "",
-        width: track.album.images.at(-1)?.width ?? 64,
-        height: track.album.images.at(-1)?.height ?? 64,
-      },
-      name: track.album.name,
-    },
+    album: track.album,
+    duration: track.duration_ms,
   }));
-
-  return tracks;
 }

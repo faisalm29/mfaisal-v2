@@ -1,5 +1,6 @@
 import { SectionContainer } from "../SectionContainer";
 import { TrackItem } from "../TrackItem";
+import { getTopTracks } from "@/lib/spotify";
 
 const music = [
   {
@@ -64,7 +65,9 @@ const music = [
   },
 ];
 
-const TopTracks = () => {
+const TopTracks = async () => {
+  const topTracks = await getTopTracks();
+  const {} = topTracks;
   return (
     <SectionContainer>
       <div>
@@ -74,9 +77,9 @@ const TopTracks = () => {
         </p>
       </div>
       <ol className="flex flex-col space-y-2">
-        {music.map((song, number) => (
-          <li key={song.title}>
-            <TrackItem track={{ number, ...song }} />
+        {topTracks.map((track, number) => (
+          <li key={track.url}>
+            <TrackItem number={number} {...track} />
           </li>
         ))}
       </ol>

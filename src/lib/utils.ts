@@ -20,3 +20,10 @@ export const sortPosts = (posts: GeneralPost[]) => {
       new Date(b.publishedAt).valueOf() - new Date(a.publishedAt).valueOf(),
   );
 };
+
+export const convertMsToMinutes = (ms: number) => {
+  const minutes = Math.floor(ms / 60_000);
+  const seconds = Math.floor((ms % 60_000) / 1_000);
+
+  return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+};

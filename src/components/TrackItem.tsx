@@ -1,18 +1,19 @@
 import Image from "next/image";
-import placeholderAlbumCover from "../../public/placeholder.jpg";
+import { TopTrack } from "@/lib/spotify.types";
+import { convertMsToMinutes } from "@/lib/utils";
 
-interface Track {
-  title: string;
-  artist: string;
-  duration: string;
+type TrackItemProps = TopTrack & {
   number: number;
-}
+};
 
-const TrackItem = ({ track }: { track: Track }) => {
-  const { title, artist, duration, number } = track;
+const TrackItem = ({ number, ...track }: TrackItemProps) => {
+  const { album, artists, duration, name, url } = track;
+  const albumCover = album.images.at(-1);
+
   return (
     <a
-      href="/"
+      href={url}
+      target="_blank"
       className="border-border hover:bg-accent/50 flex items-start justify-between gap-7 rounded-md border px-3 py-2.5 duration-300 ease-in-out"
     >
       <div className="relative">
@@ -23,22 +24,28 @@ const TrackItem = ({ track }: { track: Track }) => {
       <div className="flex w-full items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <div className="size-10 shrink-0 items-center justify-center overflow-hidden rounded-sm">
-            <Image
-              src={placeholderAlbumCover}
-              alt={`${title} album's cover`}
-              width={32}
-              height={32}
-              className="size-full object-cover grayscale"
-            />
+            {albumCover ? (
+              <Image
+                src={albumCover.url}
+                alt={`${name} album's cover`}
+                width={albumCover.width}
+                height={albumCover.height}
+                className="size-full object-cover"
+              />
+            ) : (
+              <div className="bg-muted-foreground size-full" />
+            )}
           </div>
           <div className="flex min-w-0 flex-col gap-1 text-balance">
-            <h1 className="line-clamp-1">{title}</h1>
+            <h1 className="line-clamp-1">{name}</h1>
             <p className="text-muted-foreground line-clamp-1 text-sm">
-              {artist}
+              {artists.map((artist) => artist.name).join(", ")}
             </p>
           </div>
         </div>
-        <p className="text-muted-foreground text-sm">{duration}</p>
+        <p className="text-muted-foreground text-sm">
+          {convertMsToMinutes(duration)}
+        </p>
       </div>
     </a>
   );

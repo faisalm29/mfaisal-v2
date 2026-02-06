@@ -16,11 +16,12 @@ function extractLanguage(className?: string): string {
 
 export function CodeBlock({ children, ...props }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
-  const [{ html, className, title }, setRenderState] = useState<{
+  const [{ html, className, title, raw }, setRenderState] = useState<{
     html: string;
     className: string;
     title: string | null;
-  }>({ html: "", className: "", title: null });
+    raw: string;
+  }>({ html: "", className: "", title: null, raw: "" });
   const preRef = useRef<HTMLPreElement>(null);
 
   useEffect(() => {
@@ -35,7 +36,10 @@ export function CodeBlock({ children, ...props }: CodeBlockProps) {
 
     void codeToHtml(codeText, {
       lang: lang as any,
-      theme: "github-dark",
+      themes: {
+        light: "github-light",
+        dark: "github-dark",
+      },
       defaultColor: false,
     })
       .then((html) => {
@@ -45,6 +49,7 @@ export function CodeBlock({ children, ...props }: CodeBlockProps) {
           html: doc.querySelector("code")?.innerHTML ?? "",
           className: nextClassName,
           title: nextTitle,
+          raw: codeText,
         });
       })
       .catch((error) => {
@@ -53,14 +58,14 @@ export function CodeBlock({ children, ...props }: CodeBlockProps) {
           html: "",
           className: nextClassName,
           title: nextTitle,
+          raw: codeText,
         });
       });
   }, [children]);
 
   const handleCopy = async () => {
-    const code = preRef.current?.querySelector("code")?.textContent || "";
     try {
-      await navigator.clipboard.writeText(code);
+      await navigator.clipboard.writeText(raw);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
@@ -70,17 +75,16 @@ export function CodeBlock({ children, ...props }: CodeBlockProps) {
 
   return (
     <div className="group border-border relative overflow-hidden rounded-xl border">
+      {title && (
+        <div className="border-border bg-muted/50 text-foreground rounded-t-xl border-b p-3 text-xs font-medium">
+          {title}
+        </div>
+      )}
       <pre
         ref={preRef}
         {...props}
         className={cn("m-0! overflow-x-auto p-0!", props.className)}
       >
-        {title && (
-          <div className="border-border bg-muted/50 text-foreground rounded-t-xl border-b p-3 text-xs font-medium">
-            {title}
-          </div>
-        )}
-
         <Button
           onClick={handleCopy}
           variant="outline"
@@ -88,6 +92,7 @@ export function CodeBlock({ children, ...props }: CodeBlockProps) {
           className={cn(
             "text-primary border-border absolute right-3 size-8 cursor-pointer rounded-md border opacity-100 shadow-none transition-opacity lg:opacity-0 lg:group-hover:opacity-100",
             title ? "top-13" : "top-3",
+            props.className,
           )}
           aria-label="Copy code"
         >

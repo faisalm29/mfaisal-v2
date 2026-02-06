@@ -1,7 +1,11 @@
+import { Summary, LatestPosts } from "@/components/sections";
+import { PageContainer } from "@/components/PageContainer";
+
 export default function Home() {
   return (
-    <main>
-      <h1>This is Home Page</h1>
-    </main>
+    <PageContainer>
+      <Summary />
+      <LatestPosts />
+    </PageContainer>
   );
 }

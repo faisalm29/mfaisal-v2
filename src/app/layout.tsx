@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { Header, Footer } from "@/components/sections";
+import { Navbar } from "@/components/Navbar";
 // @ts-ignore
 import "./globals.css";
 
@@ -15,9 +18,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${GeistSans.variable} ${GeistMono.variable}`}>
-        {children}
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+    >
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="relative min-h-screen w-full">
+            <div className="relative z-10 container mx-auto flex min-h-screen max-w-[60ch] flex-col space-y-12 px-6 py-12 sm:py-24">
+              <Header />
+              {children}
+              <Footer />
+              <Navbar />
+            </div>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

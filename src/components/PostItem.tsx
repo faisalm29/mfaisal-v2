@@ -16,7 +16,7 @@ const PostItem = ({ post }: { post: GeneralPost }) => {
         </ItemContent>
         <ItemContent>
           <ItemDescription>
-            <time dateTime="">{formatDate(publishedAt)}</time>
+            <time dateTime={publishedAt}>{formatDate(publishedAt)}</time>
           </ItemDescription>
         </ItemContent>
       </Link>

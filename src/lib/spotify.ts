@@ -60,6 +60,12 @@ export async function getTopTracks(): Promise<
     },
   );
 
+  if (!response.ok) {
+    const err = await response.text();
+    console.error("Spotify top tracks error:", err);
+    throw new Error("Failed to fetch top tracks");
+  }
+
   const { items } = await response.json();
 
   const tracks = items.map((track: Spotify.Track) => ({
@@ -68,9 +74,9 @@ export async function getTopTracks(): Promise<
     artists: track.artists,
     album: {
       image: {
-        url: track.album.images[2].url,
-        width: track.album.images[2].width,
-        height: track.album.images[2].height,
+        url: track.album.images.at(-1)?.url ?? "",
+        width: track.album.images.at(-1)?.width ?? 64,
+        height: track.album.images.at(-1)?.height ?? 64,
       },
       name: track.album.name,
     },

@@ -21,7 +21,10 @@ const MovieItem = ({ title, releasedDate, image }: Movie) => {
         </div>
         <div>
           <h1 className="line-clamp-1 text-sm font-medium">{title}</h1>
-          <time dateTime="" className="text-muted-foreground text-sm">
+          <time
+            dateTime={releasedDate}
+            className="text-muted-foreground text-sm"
+          >
             {releasedDate}
           </time>
         </div>

@@ -1,6 +1,15 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { GeneralPost } from "content-collections";
+import {
+  GeneralPost,
+  ProgrammingPost,
+  MovieReviewPost,
+} from "content-collections";
+import { Movie } from "./tmdb.types";
+
+type WithPublishedAt = {
+  publishedAt: string;
+};
 
 export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
@@ -14,10 +23,22 @@ export const formatDate = (date: string) => {
   });
 };
 
-export const sortPosts = (posts: GeneralPost[]) => {
+export const getYear = (date: string) => {
+  return new Date(date).getFullYear();
+};
+
+export const sortPosts = <T extends WithPublishedAt>(posts: T[]): T[] => {
   return [...posts].sort(
     (a, b) =>
       new Date(b.publishedAt).valueOf() - new Date(a.publishedAt).valueOf(),
+  );
+};
+
+export const sortMovies = (movies: Movie[]) => {
+  return [...movies].sort(
+    (a, b) =>
+      new Date(b.movie_local_data.publishedAt).valueOf() -
+      new Date(a.movie_local_data.publishedAt).valueOf(),
   );
 };
 
@@ -26,4 +47,9 @@ export const convertMsToMinutes = (ms: number) => {
   const seconds = Math.floor((ms % 60_000) / 1_000);
 
   return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+};
+
+export const normalizeCategory = (category: string) => {
+  if (category === "movies") return "movie reviews";
+  return category;
 };

@@ -21,7 +21,7 @@ const Navbar = () => {
 
   return (
     <nav className="pointer-events-none fixed inset-x-0 bottom-0 z-50 mx-auto mb-4 flex h-11">
-      <div className="bg-accent/20 border-border pointer-events-auto relative mx-auto flex max-w-[calc(100vw-2rem)] items-center justify-center gap-1 overflow-x-auto overflow-y-hidden rounded-lg border p-2 shadow-sm backdrop-blur-lg">
+      <div className="bg-accent/20 pointer-events-auto relative mx-auto flex max-w-[calc(100vw-2rem)] items-center justify-center gap-1 overflow-x-auto overflow-y-hidden rounded-lg p-2 shadow-[0_0_0_1px_rgba(0,0,0,0.08),0_1px_1px_rgba(0,0,0,0.02),0_4px_8px_rgba(0,0,0,0.04)] backdrop-blur-xl dark:shadow-[0_0_0_1px_hsla(0,0%,100%,0.06)]">
         <ul className="flex items-center">
           {navMenu.map((menu) => {
             const isActive =
@@ -35,7 +35,7 @@ const Navbar = () => {
               <li key={menu.url}>
                 <Link
                   href={menu.url}
-                  className={`focus-visible:ring-ring relative px-4 py-1.5 text-sm font-medium transition-colors outline-none focus-visible:ring-2 ${
+                  className={`focus-visible:ring-ring relative px-4 py-1.5 text-base transition-colors outline-none focus-visible:ring-2 ${
                     isActive
                       ? "text-foreground"
                       : "text-muted-foreground hover:text-foreground"

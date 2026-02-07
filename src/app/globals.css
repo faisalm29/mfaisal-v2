@@ -147,7 +147,7 @@
   }
 
   .prose code {
-    @apply bg-muted/60 dark:bg-muted/40 text-foreground/90! m-0! mx-1! rounded-md! border px-1.5 py-0.5 font-mono text-[13px]!;
+    @apply bg-accent/60 dark:bg-accent/40 text-foreground/90! m-0! mx-1! rounded-md! border px-1.5 py-0.5 font-mono text-[13px]!;
   }
 
   .prose code::before,
@@ -188,7 +188,7 @@
   }
 
   .prose blockquote {
-    @apply bg-muted/50 border-muted-foreground! rounded-md rounded-l-none border-l-4 p-4 pl-4 italic;
+    @apply bg-accent/50 border-muted-foreground! rounded-md rounded-l-none border-l-4 p-4 pl-4 italic;
   }
 
   .prose blockquote p {
@@ -235,11 +235,11 @@
   }
 
   .prose tr {
-    @apply hover:bg-accent/50! h-10! cursor-pointer! transition-colors!;
+    @apply hover:bg-accent/50! h-10! transition-colors!;
   }
 
   .prose :where(th):not(:where([class~="not-prose"] *)) {
-    @apply text-foreground! border-border bg-muted/50 m-0! border-b p-3! py-2! text-left font-semibold;
+    @apply text-foreground! border-border bg-accent/50 m-0! border-b p-3! py-2! text-left font-semibold;
   }
 
   .prose :where(td):not(:where([class~="not-prose"] *)) {

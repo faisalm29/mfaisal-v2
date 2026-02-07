@@ -23,7 +23,15 @@ const Profile = () => {
           <CustomLink variant="secondary" href="/movies">
             movies
           </CustomLink>{" "}
-          section for what interests me.
+          section for what interests me. This blog is open source. Source code
+          can be found{" "}
+          <CustomLink
+            variant="secondary"
+            href="https://github.com/faisalm29/mfaisal-v2"
+          >
+            here
+          </CustomLink>
+          .
         </p>
       </div>
     </SectionContainer>

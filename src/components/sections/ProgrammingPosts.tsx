@@ -1,23 +1,31 @@
 import { SectionContainer } from "../SectionContainer";
 import { PostItem } from "../PostItem";
-import { allGeneralPosts } from "content-collections";
-import { sortPosts } from "@/lib/utils";
+import { type ProgrammingPost } from "content-collections";
 import { ViewAllButton } from "../ViewAllButton";
 
-const ProgrammingPosts = () => {
-  const sortedPosts = sortPosts(allGeneralPosts);
+interface ProgrammingPostsSection {
+  programmingPosts: ProgrammingPost[];
+  viewAllButton?: boolean;
+}
+
+const ProgrammingPosts = ({
+  programmingPosts,
+  viewAllButton,
+}: ProgrammingPostsSection) => {
   return (
     <SectionContainer>
       <h1>Programming</h1>
       <ul>
-        {sortedPosts.map((post) => (
+        {programmingPosts.map((post) => (
           <li key={post.slug}>
             <PostItem post={post} />
           </li>
         ))}
-        <li className="mt-2">
-          <ViewAllButton href="/programming" />
-        </li>
+        {viewAllButton && (
+          <li className="mt-2">
+            <ViewAllButton href="/programming" />
+          </li>
+        )}
       </ul>
     </SectionContainer>
   );

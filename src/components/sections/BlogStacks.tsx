@@ -39,7 +39,7 @@ const stacks = [
     website: "https://tailwindcss.com/",
   },
   {
-    name: "Shadn Components Libary",
+    name: "Shadcn/UI",
     website: "https://ui.shadcn.com/",
   },
   {

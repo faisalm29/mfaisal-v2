@@ -3,14 +3,14 @@ import Link from "next/link";
 import { formatDate } from "@/lib/utils";
 import { normalizeCategory } from "@/lib/utils";
 
-interface LatesPost {
+interface LatestPost {
   slug: string;
   title: string;
   category: string;
   publishedAt: string;
 }
 
-const LatestPostItem = ({ post }: { post: LatesPost }) => {
+const LatestPostItem = ({ post }: { post: LatestPost }) => {
   const { slug, title, category, publishedAt } = post;
   return (
     <Item asChild>

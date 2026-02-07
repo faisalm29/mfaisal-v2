@@ -2,25 +2,25 @@ import { MovieReviewPost } from "content-collections";
 
 export interface TMDBMovieDetails {
   adult: boolean;
-  backdrop_path: string;
+  backdrop_path: string | null;
   belongs_to_collection: Collection | null;
   budget: number;
   genres: Genre[];
   homepage: string;
   id: number;
-  imdb_id: string;
+  imdb_id: string | null;
   origin_country: string[];
   original_language: string;
   original_title: string;
   overview: string;
   popularity: number;
-  poster_path: string;
+  poster_path: string | null;
   production_companies: ProductionCompany[];
   production_countries: ProductionCountry[];
   release_date: string;
   revenue: number;
   runtime: number;
-  spoken_language: SpokenLanguage[];
+  spoken_languages: SpokenLanguage[];
   status: string;
   tagline: string;
   title: string;
@@ -43,7 +43,7 @@ export interface Cast {
   name: string;
   original_name: string;
   popularity: number;
-  profile_path: string;
+  profile_path: string | null;
   cast_id: number;
   character: string;
   credit_id: string;
@@ -67,8 +67,8 @@ export interface Crew {
 export interface Collection {
   id: number;
   name: string;
-  poster_path: string;
-  backdrop_path: string;
+  poster_path: string | null;
+  backdrop_path: string | null;
 }
 
 export interface Genre {
@@ -78,7 +78,7 @@ export interface Genre {
 
 export interface ProductionCompany {
   id: number;
-  logo_path: string;
+  logo_path: string | null;
   name: string;
   origin_country: string;
 }

@@ -3,6 +3,10 @@ import { Movie, TMDBMovieCredits, TMDBMovieDetails } from "./tmdb.types";
 
 const TMDB_API_KEY = process.env.TMDB_API_KEY;
 
+if (!TMDB_API_KEY) {
+  throw new Error("TMDB_API_KEY environtment variable is not set");
+}
+
 const getMovieDetails = async (id: string): Promise<TMDBMovieDetails> => {
   const res = await fetch(
     `https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}`,
@@ -37,31 +41,20 @@ const getLocalMovieData = (id: string) => {
 };
 
 export const getMovieById = async (id: string): Promise<Movie> => {
-  const movieDetais = await getMovieDetails(id);
-  const movieCredits = await getMovieCredits(id);
+  const [movieDetails, movieCredits] = await Promise.all([
+    getMovieDetails(id),
+    getMovieCredits(id),
+  ]);
   const movieLocalData = getLocalMovieData(id);
 
   return {
     id: Number(id),
-    movie_details: movieDetais,
+    movie_details: movieDetails,
     movie_credits: movieCredits,
     movie_local_data: movieLocalData,
   };
 };
 
 export const getMovies = async (ids: string[]): Promise<Movie[]> => {
-  return Promise.all(
-    ids.map(async (id) => {
-      const movieDetails = await getMovieDetails(id);
-      const movieCredits = await getMovieCredits(id);
-      const movieLocalData = getLocalMovieData(id);
-
-      return {
-        id: Number(id),
-        movie_details: movieDetails,
-        movie_credits: movieCredits,
-        movie_local_data: movieLocalData,
-      };
-    }),
-  );
+  return Promise.all(ids.map((id) => getMovieById(id)));
 };

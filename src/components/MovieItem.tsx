@@ -23,13 +23,13 @@ const MovieItem = ({ movie }: { movie: Movie }) => {
               height: "auto",
             }}
             width={500}
-            height={300}
+            height={750}
           />
         </div>
         <div>
-          <h1 className="line-clamp-1 text-sm font-medium">
+          <h3 className="line-clamp-1 text-sm font-medium">
             {movie_details.title}
-          </h1>
+          </h3>
           <time
             dateTime={movie_details.release_date}
             className="text-muted-foreground text-sm"

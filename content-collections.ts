@@ -7,23 +7,25 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import { remarkCodeMeta } from "@/lib/remark-code-meta";
 
+const postSchema = z.object({
+  title: z.string(),
+  excerpt: z.string(),
+  category: z.string(),
+  publishedAt: z.string(),
+  content: z.string(),
+  thumbnail: z
+    .object({
+      src: z.string(),
+      alt: z.string(),
+    })
+    .optional(),
+});
+
 const generalPost = defineCollection({
   name: "generalPost",
   directory: "content",
   include: "general/*.mdx",
-  schema: z.object({
-    title: z.string(),
-    excerpt: z.string(),
-    category: z.string(),
-    publishedAt: z.string(),
-    content: z.string(),
-    thumbnail: z
-      .object({
-        src: z.string(),
-        alt: z.string(),
-      })
-      .optional(),
-  }),
+  schema: postSchema,
   transform: async (document, context) => {
     const mdx = await compileMDX(context, document, {
       remarkPlugins: [remarkGfm, remarkCodeMeta],
@@ -52,19 +54,7 @@ const programmingPost = defineCollection({
   name: "programmingPost",
   directory: "content",
   include: "programming/*.mdx",
-  schema: z.object({
-    title: z.string(),
-    excerpt: z.string(),
-    category: z.string(),
-    publishedAt: z.string(),
-    content: z.string(),
-    thumbnail: z
-      .object({
-        src: z.string(),
-        alt: z.string(),
-      })
-      .optional(),
-  }),
+  schema: postSchema,
   transform: async (document, context) => {
     const mdx = await compileMDX(context, document, {
       remarkPlugins: [remarkGfm, remarkCodeMeta],

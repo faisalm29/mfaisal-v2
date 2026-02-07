@@ -29,10 +29,7 @@ const LatestPosts = async ({
         ))}
         {viewAllButton && (
           <li className="mt-2">
-            <ViewAllButton
-              href="/blog
-            "
-            />
+            <ViewAllButton href="/blog" />
           </li>
         )}
       </ul>

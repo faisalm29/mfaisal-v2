@@ -23,12 +23,16 @@ export default async function MovieReviewPostPage({
     (movie) => movie.slug === slug,
   );
 
-  if (!localMovieData)
-    throw new Error(`Cannot get local movie data with slug: ${slug}`);
+  if (!localMovieData) return notFound();
 
-  const movie = await getMovieById(localMovieData.id);
+  let movie;
 
-  if (!movie) return notFound();
+  try {
+    movie = await getMovieById(localMovieData.id);
+  } catch (e) {
+    console.error(`Failed to fetch movie data for id ${localMovieData.id}:`, e);
+    return notFound();
+  }
 
   const { id, movie_details, movie_credits, movie_local_data } = movie;
   const directors = movie_credits.crew

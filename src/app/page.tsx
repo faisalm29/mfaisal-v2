@@ -10,7 +10,13 @@ import { getMovies } from "@/lib/tmdb";
 
 export default async function Home() {
   const movieIds = allMovieReviewPosts.map((movie) => movie.id);
-  const movies = await getMovies(movieIds);
+  let movies: Awaited<ReturnType<typeof getMovies>> = [];
+
+  try {
+    movies = await getMovies(movieIds);
+  } catch (e) {
+    console.error("Failed to fetch movies from TMDB", e);
+  }
 
   const generalPosts = allGeneralPosts.map((post) => ({
     slug: post.slug,

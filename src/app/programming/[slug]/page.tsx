@@ -1,4 +1,4 @@
-import { allGeneralPosts } from "content-collections";
+import { allProgrammingPosts } from "content-collections";
 import { notFound } from "next/navigation";
 import { MDXContent } from "@content-collections/mdx/react";
 import { MDXComponents } from "@/components/MDXComponents";
@@ -7,18 +7,18 @@ import { formatDate } from "@/lib/utils";
 import { Calendar, Timer } from "lucide-react";
 
 export async function generateStaticParams() {
-  return allGeneralPosts.map((post) => ({
+  return allProgrammingPosts.map((post) => ({
     slug: post.slug,
   }));
 }
 
-export default async function GeneralPostPage({
+export default async function ProgrammingPostPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = allGeneralPosts.find((post) => post.slug === slug);
+  const post = allProgrammingPosts.find((post) => post.slug === slug);
 
   if (!post) return notFound();
 

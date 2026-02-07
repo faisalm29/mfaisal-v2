@@ -1,31 +1,40 @@
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import Link from "next/link";
+import { getYear } from "@/lib/utils";
+import { Movie } from "@/lib/tmdb.types";
 
-interface Movie {
-  title: string;
-  releasedDate: string;
-  image: StaticImageData;
-}
-
-const MovieItem = ({ title, releasedDate, image }: Movie) => {
+const MovieItem = ({ movie }: { movie: Movie }) => {
+  const { id, movie_credits, movie_details, movie_local_data } = movie;
   return (
     <Link
-      href="/"
-      aria-label={title}
-      title={title}
+      href={`/${movie_local_data.category}/${movie_local_data.slug}`}
+      aria-label={movie_details.title}
+      title={movie_details.title}
       className="border-border hover:bg-accent/50 block rounded-md border p-3 transition-all duration-300 ease-in-out"
     >
       <div className="flex flex-col space-y-3">
         <div className="overflow-hidden rounded-md">
-          <Image src={image} alt={`${title}'s movie poster`} />
+          <Image
+            src={`https://image.tmdb.org/t/p/w500${movie_details.poster_path}`}
+            alt={`${movie_details.title}'s movie poster`}
+            sizes="100vw"
+            style={{
+              width: "100%",
+              height: "auto",
+            }}
+            width={500}
+            height={300}
+          />
         </div>
         <div>
-          <h1 className="line-clamp-1 text-sm font-medium">{title}</h1>
+          <h1 className="line-clamp-1 text-sm font-medium">
+            {movie_details.title}
+          </h1>
           <time
-            dateTime={releasedDate}
+            dateTime={movie_details.release_date}
             className="text-muted-foreground text-sm"
           >
-            {releasedDate}
+            {getYear(movie_details.release_date)}
           </time>
         </div>
       </div>

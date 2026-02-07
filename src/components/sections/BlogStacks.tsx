@@ -39,6 +39,10 @@ const stacks = [
     website: "https://tailwindcss.com/",
   },
   {
+    name: "Shadn Components Libary",
+    website: "https://ui.shadcn.com/",
+  },
+  {
     name: "Motion",
     website: "https://motion.dev/",
   },

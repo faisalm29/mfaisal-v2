@@ -76,7 +76,7 @@ export function CodeBlock({ children, ...props }: CodeBlockProps) {
   return (
     <div className="group border-border relative overflow-hidden rounded-xl border">
       {title && (
-        <div className="border-border bg-muted/50 text-foreground rounded-t-xl border-b p-3 text-xs font-medium">
+        <div className="border-border bg-accent/50 text-foreground rounded-t-xl border-b p-3 text-xs font-medium">
           {title}
         </div>
       )}

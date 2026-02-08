@@ -28,11 +28,11 @@ const stacks = [
   },
   {
     name: "Spotify API",
-    website: "https://developer.spotify.com/documentation/web-api",
+    website: "https://developer.spotify.com/documentation/web-api/",
   },
   {
     name: "TMDB API",
-    website: "https://www.themoviedb.org/",
+    website: "https://developer.themoviedb.org/",
   },
   {
     name: "TailwindCSS",

@@ -1,14 +1,17 @@
 import { type GeneralPost } from "content-collections";
 import { SectionContainer } from "../SectionContainer";
 import { PostItem } from "../PostItem";
-import { ViewAllButton } from "../ViewAllButton";
+import { ViewMoreButton } from "../ViewMoreButton";
 
 interface GeneralPostsSection {
   generalPosts: GeneralPost[];
-  viewAllButton?: boolean;
+  viewMorebutton?: boolean;
 }
 
-const GeneralPosts = ({ generalPosts, viewAllButton }: GeneralPostsSection) => {
+const GeneralPosts = ({
+  generalPosts,
+  viewMorebutton,
+}: GeneralPostsSection) => {
   return (
     <SectionContainer>
       <h1>General</h1>
@@ -18,9 +21,9 @@ const GeneralPosts = ({ generalPosts, viewAllButton }: GeneralPostsSection) => {
             <PostItem post={post} />
           </li>
         ))}
-        {viewAllButton && (
+        {viewMorebutton && (
           <li className="mt-2">
-            <ViewAllButton href="/general" />
+            <ViewMoreButton href="/general" />
           </li>
         )}
       </ul>

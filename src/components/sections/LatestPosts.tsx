@@ -1,6 +1,6 @@
 import { SectionContainer } from "../SectionContainer";
 import { LatestPostItem } from "../LatestPostItem";
-import { ViewAllButton } from "../ViewAllButton";
+import { ViewMoreButton } from "../ViewMoreButton";
 
 interface LatesPost {
   slug: string;
@@ -11,12 +11,12 @@ interface LatesPost {
 
 interface LatestPostsSection {
   latesPost: LatesPost[];
-  viewAllButton?: boolean;
+  viewMoreButton?: boolean;
 }
 
 const LatestPosts = async ({
   latesPost,
-  viewAllButton,
+  viewMoreButton,
 }: LatestPostsSection) => {
   return (
     <SectionContainer>
@@ -27,9 +27,9 @@ const LatestPosts = async ({
             <LatestPostItem post={post} />
           </li>
         ))}
-        {viewAllButton && (
+        {viewMoreButton && (
           <li className="mt-2">
-            <ViewAllButton href="/blog" />
+            <ViewMoreButton href="/blog" />
           </li>
         )}
       </ul>

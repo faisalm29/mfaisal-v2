@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-const ViewAllButton = ({ href }: { href: string }) => {
+const ViewMoreButton = ({ href }: { href: string }) => {
   return (
     <Link
       href={href}
@@ -9,11 +9,11 @@ const ViewAllButton = ({ href }: { href: string }) => {
     >
       <div className="bg-muted/50 text-muted-foreground group-hover:bg-muted group-hover:text-foreground group justify flex h-full items-center justify-center rounded-sm p-2 text-sm transition-all duration-300 ease-in-out">
         <span className="flex items-center gap-1 transition-all duration-300 ease-in-out group-hover:gap-2">
-          View all <ArrowRight size={14} />
+          View more <ArrowRight size={14} />
         </span>
       </div>
     </Link>
   );
 };
 
-export { ViewAllButton };
+export { ViewMoreButton };

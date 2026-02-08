@@ -20,12 +20,12 @@ const PostPage = async () => {
   return (
     <PageContainer>
       <h1>Blog</h1>
-      <GeneralPosts generalPosts={sortedGeneralPosts} viewAllButton />
+      <GeneralPosts generalPosts={sortedGeneralPosts} viewMorebutton />
       <ProgrammingPosts
         programmingPosts={sortedProgrammingPosts}
-        viewAllButton
+        viewMoreButton
       />
-      <MovieReviews movies={movies} viewAllButton />
+      <MovieReviews movies={movies} viewMoreButton />
     </PageContainer>
   );
 };

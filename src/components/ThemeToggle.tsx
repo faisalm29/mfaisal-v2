@@ -25,11 +25,11 @@ const ThemeToggle = () => {
   const renderIcon = () => {
     switch (theme) {
       case "light":
-        return <Sun size={16} />;
+        return <Sun size={18} />;
       case "dark":
-        return <Moon size={16} />;
+        return <Moon size={18} />;
       case "system":
-        return <Monitor size={16} />;
+        return <Monitor size={18} />;
     }
   };
   return (

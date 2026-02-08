@@ -1,14 +1,14 @@
 import { SectionContainer } from "../SectionContainer";
 import { MovieItem } from "../MovieItem";
-import { ViewAllMovieButton } from "../ViewAllMovieButton";
+import { ViewMoreMoviesButton } from "../ViewMoreMoviesButton";
 import { Movie } from "@/lib/tmdb.types";
 
 interface MovieReviewsSections {
   movies: Movie[];
-  viewAllButton?: boolean;
+  viewMoreButton?: boolean;
 }
 
-const MovieReviews = ({ movies, viewAllButton }: MovieReviewsSections) => {
+const MovieReviews = ({ movies, viewMoreButton }: MovieReviewsSections) => {
   return (
     <SectionContainer>
       <h1>Movie Reviews</h1>
@@ -18,9 +18,9 @@ const MovieReviews = ({ movies, viewAllButton }: MovieReviewsSections) => {
             <MovieItem movie={movie} />
           </li>
         ))}
-        {viewAllButton && (
+        {viewMoreButton && (
           <li>
-            <ViewAllMovieButton href="/movies" />
+            <ViewMoreMoviesButton href="/movies" />
           </li>
         )}
       </ul>

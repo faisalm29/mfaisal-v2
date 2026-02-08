@@ -1,6 +1,7 @@
 import { SectionContainer } from "../SectionContainer";
 import { TrackItem } from "../TrackItem";
 import { getTopTracks } from "@/lib/spotify";
+import { getCurrentDateTime } from "@/lib/utils";
 
 const TopTracks = async () => {
   const topTracks = await getTopTracks();
@@ -19,6 +20,17 @@ const TopTracks = async () => {
           </li>
         ))}
       </ol>
+      <small className="text-muted-foreground">
+        Last updated:{" "}
+        <time dateTime={getCurrentDateTime().toISOString().split("T")[0]}>
+          {getCurrentDateTime().toLocaleString("en-US", {
+            timeZone: "Asia/Jakarta",
+            dateStyle: "medium",
+            timeStyle: "short",
+            hour12: false,
+          })}
+        </time>
+      </small>
     </SectionContainer>
   );
 };

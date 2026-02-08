@@ -4,7 +4,7 @@ import { Movie, TMDBMovieCredits, TMDBMovieDetails } from "./tmdb.types";
 const TMDB_API_KEY = process.env.TMDB_API_KEY;
 
 if (!TMDB_API_KEY) {
-  throw new Error("TMDB_API_KEY environtment variable is not set");
+  throw new Error("TMDB_API_KEY environment variable is not set");
 }
 
 const getMovieDetails = async (id: string): Promise<TMDBMovieDetails> => {

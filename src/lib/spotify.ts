@@ -4,6 +4,12 @@ const clientId = process.env.SPOTIFY_CLIENT_ID;
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN;
 
+if (!clientId || !clientSecret || !refreshToken) {
+  throw new Error(
+    "Spotify API related environment variable is not set correctly",
+  );
+}
+
 async function getAccessToken() {
   if (!clientId || !clientSecret || !refreshToken) {
     throw new Error("Missing Spotify environment variables");

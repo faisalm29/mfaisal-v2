@@ -1,10 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import {
-  GeneralPost,
-  ProgrammingPost,
-  MovieReviewPost,
-} from "content-collections";
 import { Movie } from "./tmdb.types";
 
 type WithPublishedAt = {
@@ -25,6 +20,10 @@ export const formatDate = (date: string) => {
 
 export const getYear = (date: string) => {
   return new Date(date).getFullYear();
+};
+
+export const getCurrentDateTime = () => {
+  return new Date();
 };
 
 export const sortPosts = <T extends WithPublishedAt>(posts: T[]): T[] => {

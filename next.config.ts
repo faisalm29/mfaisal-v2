@@ -3,6 +3,7 @@ import { withContentCollections } from "@content-collections/next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  output: "export",
   images: {
     remotePatterns: [
       {

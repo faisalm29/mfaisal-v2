@@ -48,7 +48,7 @@ export default async function Home() {
   return (
     <PageContainer>
       <Summary />
-      <LatestPosts latesPost={sortedLatestPosts} viewAllButton />
+      <LatestPosts latesPost={sortedLatestPosts} viewMoreButton />
     </PageContainer>
   );
 }

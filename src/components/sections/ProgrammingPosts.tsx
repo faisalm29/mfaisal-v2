@@ -1,16 +1,16 @@
 import { SectionContainer } from "../SectionContainer";
 import { PostItem } from "../PostItem";
 import { type ProgrammingPost } from "content-collections";
-import { ViewAllButton } from "../ViewAllButton";
+import { ViewMoreButton } from "../ViewMoreButton";
 
 interface ProgrammingPostsSection {
   programmingPosts: ProgrammingPost[];
-  viewAllButton?: boolean;
+  viewMoreButton?: boolean;
 }
 
 const ProgrammingPosts = ({
   programmingPosts,
-  viewAllButton,
+  viewMoreButton,
 }: ProgrammingPostsSection) => {
   return (
     <SectionContainer>
@@ -21,9 +21,9 @@ const ProgrammingPosts = ({
             <PostItem post={post} />
           </li>
         ))}
-        {viewAllButton && (
+        {viewMoreButton && (
           <li className="mt-2">
-            <ViewAllButton href="/programming" />
+            <ViewMoreButton href="/programming" />
           </li>
         )}
       </ul>

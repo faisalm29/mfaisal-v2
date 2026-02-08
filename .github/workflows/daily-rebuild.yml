@@ -1,0 +1,69 @@
+name: Scheduled Spotify-Based Deploy
+
+on:
+  schedule:
+    - cron: "0 17 * * *" # 00:00 GMT+7
+  workflow_dispatch:
+
+jobs:
+  check-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get Spotify Data and Hash
+        id: spotify
+        run: |
+          # 1. Get a fresh Access Token using the Refresh Token
+          TOKEN=$(curl -s -X POST https://accounts.spotify.com/api/token \
+            -H "Content-Type: application/x-www-form-urlencoded" \
+            -d "grant_type=refresh_token&refresh_token=${{ secrets.SPOTIFY_REFRESH_TOKEN }}&client_id=${{ secrets.SPOTIFY_CLIENT_ID }}&client_secret=${{ secrets.SPOTIFY_CLIENT_SECRET }}" \
+            | jq -r '.access_token')
+
+          # 2. Fetch Top Tracks (limit to top 10 for consistency)
+          curl -s -X GET "https://api.spotify.com/v1/me/top/tracks?limit=10&time_range=short_term" \
+            -H "Authorization: Bearer $TOKEN" > current_top_tracks.json
+
+          # 3. Create a hash of just the Track IDs to see if the list order/content changed
+          TRACK_HASH=$(jq -r '.items[].id' current_top_tracks.json | sha256sum | awk '{ print $1 }')
+          echo "track_hash=$TRACK_HASH" >> $GITHUB_ENV
+
+      - name: Cache Spotify Hash
+        id: cache-spotify
+        uses: actions/cache@v4
+        with:
+          path: .spotify_hash
+          key: spotify-${{ env.track_hash }}
+
+      - name: Decide to Deploy
+        id: decision
+        run: |
+          if [ -f .spotify_hash ] && [ "$(cat .spotify_hash)" == "${{ env.track_hash }}" ]; then
+            echo "Spotify Top Tracks haven't changed. Skipping build."
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "${{ env.track_hash }}" > .spotify_hash
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup & Build
+        if: steps.decision.outputs.changed == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install and Build
+        if: steps.decision.outputs.changed == 'true'
+        run: |
+          npm ci
+          npm run build
+
+      - name: Publish to Cloudflare Pages
+        if: steps.decision.outputs.changed == 'true'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy out --project-name=mfaisal-v2

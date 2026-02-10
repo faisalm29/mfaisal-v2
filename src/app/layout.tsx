@@ -4,6 +4,7 @@ import { GeistMono } from "geist/font/mono";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Header, Footer } from "@/components/sections";
 import { Navbar } from "@/components/Navbar";
+import { SmoothScrollProvider } from "@/components/Lenis";
 // @ts-ignore
 import "./globals.css";
 
@@ -21,24 +22,27 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
       className={`${GeistSans.variable} ${GeistMono.variable}`}
     >
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="relative min-h-screen w-full">
-            <div className="relative z-10 container mx-auto flex min-h-screen max-w-[60ch] flex-col space-y-12 px-6 py-12 sm:py-24">
-              <Header />
-              {children}
-              <Footer />
-              <Navbar />
+        <SmoothScrollProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className="relative min-h-screen w-full">
+              <div className="relative z-10 container mx-auto flex min-h-screen max-w-[60ch] flex-col space-y-12 px-6 py-12 sm:py-24">
+                <Header />
+                {children}
+                <Footer />
+                <Navbar />
+              </div>
             </div>
-          </div>
-        </ThemeProvider>
+          </ThemeProvider>
+        </SmoothScrollProvider>
       </body>
     </html>
   );

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 import Link from "next/link";
 import { getYear } from "@/lib/utils";
 import { Movie } from "@/lib/tmdb.types";
@@ -14,7 +14,7 @@ const MovieItem = ({ movie }: { movie: Movie }) => {
     >
       <div className="flex flex-col space-y-3">
         <div className="overflow-hidden rounded-md">
-          <Image
+          <ExportedImage
             src={`https://image.tmdb.org/t/p/w500${movie_details.poster_path}`}
             alt={`${movie_details.title}'s movie poster`}
             sizes="100vw"

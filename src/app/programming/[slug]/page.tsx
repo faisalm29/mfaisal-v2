@@ -2,7 +2,7 @@ import { allProgrammingPosts } from "content-collections";
 import { notFound } from "next/navigation";
 import { MDXContent } from "@content-collections/mdx/react";
 import { MDXComponents } from "@/components/MDXComponents";
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 import { formatDate } from "@/lib/utils";
 import { Calendar, Timer } from "lucide-react";
 
@@ -27,7 +27,7 @@ export default async function ProgrammingPostPage({
       <div className="flex flex-col space-y-8">
         {post.thumbnail && (
           <div className="relative aspect-2/1 w-full overflow-hidden rounded-md">
-            <Image
+            <ExportedImage
               src={post.thumbnail.src}
               alt={post.thumbnail.alt}
               fill

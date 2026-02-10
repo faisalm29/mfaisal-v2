@@ -256,7 +256,3 @@
     @apply border-b-0;
   }
 }
-
-html {
-  scroll-behavior: smooth;
-}

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 import { TopTrack } from "@/lib/spotify.types";
 import { convertMsToMinutes } from "@/lib/utils";
 
@@ -25,7 +25,7 @@ const TrackItem = ({ number, ...track }: TrackItemProps) => {
         <div className="flex items-center gap-4">
           <div className="size-10 shrink-0 items-center justify-center overflow-hidden rounded-sm">
             {albumCover ? (
-              <Image
+              <ExportedImage
                 src={albumCover.url}
                 alt={`${name} album's cover`}
                 width={albumCover.width}

@@ -25,7 +25,11 @@ const Footer = () => {
           <ul className="md:flex md:gap-3">
             {credtis.map((credit) => (
               <li key={credit.web}>
-                <CustomLink variant="muted" href={credit.web}>
+                <CustomLink
+                  variant="muted"
+                  href={credit.web}
+                  className="text-xs"
+                >
                   <span className="flex items-center gap-px transition-all duration-300 ease-in-out hover:gap-1">
                     {credit.name} <ArrowUpRight size={16} />
                   </span>

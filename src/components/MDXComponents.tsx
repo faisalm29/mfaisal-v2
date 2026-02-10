@@ -27,13 +27,13 @@ export const MDXComponents = {
     </div>
   ),
   h2: ({ ...props }: React.ComponentProps<"h2">) => {
-    return <h2 {...props} className="group relative"></h2>;
+    return <h2 {...props} className="group relative scroll-m-5"></h2>;
   },
   h3: ({ ...props }: React.ComponentProps<"h3">) => {
-    return <h3 {...props} className="group relative"></h3>;
+    return <h3 {...props} className="group relative scroll-m-5"></h3>;
   },
-  h4: ({ ...props }: React.ComponentProps<"h3">) => {
-    return <h4 {...props} className="group relative"></h4>;
+  h4: ({ ...props }: React.ComponentProps<"h4">) => {
+    return <h4 {...props} className="group relative scroll-m-5"></h4>;
   },
   pre: (props: React.ComponentProps<"pre">) => <CodeBlock {...props} />,
   code: ({ children, ...props }: CodeProps) => {

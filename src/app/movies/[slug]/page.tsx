@@ -3,7 +3,7 @@ import { getMovieById } from "@/lib/tmdb";
 import { notFound } from "next/navigation";
 import { MDXContent } from "@content-collections/mdx/react";
 import { MDXComponents } from "@/components/MDXComponents";
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 import { formatDate, getYear } from "@/lib/utils";
 import { Calendar } from "lucide-react";
 
@@ -48,7 +48,7 @@ export default async function MovieReviewPostPage({
           <div className="flex flex-col space-y-8">
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               {movie_details.poster_path && (
-                <Image
+                <ExportedImage
                   src={`https://image.tmdb.org/t/p/w500${movie_details.poster_path}`}
                   alt={`${movie_details.title}'s movie poster`}
                   sizes="100vw"

@@ -5,6 +5,16 @@ import {
   Contacts,
 } from "@/components/sections";
 import { PageContainer } from "@/components/PageContainer";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About",
+  description: "About me, this blog, and anything related.",
+  openGraph: {
+    title: "About",
+    description: "About me, this blog, and anything related.",
+  },
+};
 
 const AboutPage = () => {
   return (

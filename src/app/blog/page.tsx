@@ -10,8 +10,18 @@ import {
 } from "content-collections";
 import { getMovies } from "@/lib/tmdb";
 import { sortPosts, sortMovies } from "@/lib/utils";
+import type { Metadata } from "next";
 
-const PostPage = async () => {
+export const metadata: Metadata = {
+  title: "Blog",
+  description: "All of my writings.",
+  openGraph: {
+    title: "Blog",
+    description: "All of my writings.",
+  },
+};
+
+const BlogPage = async () => {
   const sortedGeneralPosts = sortPosts(allGeneralPosts).slice(0, 5);
   const sortedProgrammingPosts = sortPosts(allProgrammingPosts).slice(0, 5);
   const movieIds = allMovieReviewPosts.map((movie) => movie.id);
@@ -32,7 +42,7 @@ const PostPage = async () => {
         <div className="flex flex-col space-y-2">
           <h2 className="font-display text-xl font-medium">Programming</h2>
           <p className="text-muted-foreground">
-            Writings specifically about programming
+            Writings specifically about programming.
           </p>
         </div>
         <ProgrammingPosts
@@ -53,4 +63,4 @@ const PostPage = async () => {
   );
 };
 
-export default PostPage;
+export default BlogPage;

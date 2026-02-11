@@ -6,11 +6,73 @@ import { MDXComponents } from "@/components/MDXComponents";
 import ExportedImage from "next-image-export-optimizer";
 import { formatDate, getYear } from "@/lib/utils";
 import { Calendar } from "lucide-react";
+import type { Metadata } from "next";
 
 export async function generateStaticParams() {
   return allMovieReviewPosts.map((post) => ({
     slug: post.slug,
   }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata | undefined> {
+  const { slug } = await params;
+  const post = allMovieReviewPosts.find((post) => post.slug === slug);
+
+  if (!post) {
+    return;
+  }
+
+  let movie;
+
+  try {
+    movie = await getMovieById(post.id);
+  } catch (e) {
+    console.error(`Failed to fetch movie data for id ${post.id}:`, e);
+    return;
+  }
+
+  return {
+    title: `${movie.movie_details.title} Movie Review`,
+    description: movie.movie_details.overview,
+    openGraph: {
+      title: movie.movie_details.title,
+      description: movie.movie_details.overview,
+      images: [
+        {
+          url: movie.movie_details.poster_path
+            ? `https://image.tmdb.org/t/p/w500${movie.movie_details.poster_path}`
+            : "/og-image.jpg",
+          alt: movie.movie_details.poster_path
+            ? `${movie.movie_details.title}'s movie poster`
+            : `${movie.movie_details.title}'s movie poster`,
+        },
+      ],
+      type: "article",
+      publishedTime: movie.movie_local_data.publishedAt,
+      authors: ["Faisal M."],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: movie.movie_details.title,
+      description: movie.movie_details.overview,
+      site: "@hrrblealtruist",
+      creator: "@hrrblealtruist",
+      images: [
+        {
+          url: movie.movie_details.poster_path
+            ? `https://image.tmdb.org/t/p/w500${movie.movie_details.poster_path}`
+            : "/og-image.jpg",
+          alt: movie.movie_details.poster_path
+            ? `${movie.movie_details.title}'s movie poster`
+            : `${movie.movie_details.title}'s movie poster`,
+        },
+      ],
+    },
+  };
 }
 
 export default async function MovieReviewPostPage({

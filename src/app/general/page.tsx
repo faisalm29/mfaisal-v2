@@ -3,6 +3,16 @@ import { SectionContainer } from "@/components/SectionContainer";
 import { GeneralPosts } from "@/components/GeneralPosts";
 import { allGeneralPosts } from "content-collections";
 import { sortPosts } from "@/lib/utils";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "General Writings",
+  description: "Writings about anything except programming.",
+  openGraph: {
+    title: "General Writings",
+    description: "Writings about anything except programming.",
+  },
+};
 
 const AllGeneralPage = () => {
   const sortedPosts = sortPosts(allGeneralPosts);

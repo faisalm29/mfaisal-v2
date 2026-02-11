@@ -4,6 +4,16 @@ import { MovieReviews } from "@/components/MovieReviews";
 import { allMovieReviewPosts } from "content-collections";
 import { getMovies } from "@/lib/tmdb";
 import { sortMovies } from "@/lib/utils";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Movie Reviews",
+  description: "My take on the movies I've watched recently.",
+  openGraph: {
+    title: "Movie Reviews",
+    description: "My take on the movies I've watched recently.",
+  },
+};
 
 const AllMoviesPage = async () => {
   const movieIds = allMovieReviewPosts.map((movie) => movie.id);

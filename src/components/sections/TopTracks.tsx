@@ -7,8 +7,8 @@ const TopTracks = async () => {
   const topTracks = await getTopTracks();
   return (
     <SectionContainer>
-      <div>
-        <h1>Top Tracks</h1>
+      <div className="flex flex-col space-y-1.5">
+        <h2 className="font-display text-xl font-medium">Top Tracks</h2>
         <p className="text-muted-foreground">
           My current Spotify heavy rotation. Updated daily.
         </p>

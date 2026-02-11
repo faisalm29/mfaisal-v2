@@ -20,7 +20,7 @@ const LatestPosts = async ({
 }: LatestPostsSection) => {
   return (
     <SectionContainer>
-      <h1>Latest Posts</h1>
+      <h1 className="font-display text-2xl font-medium">Latest Posts</h1>
       <ul>
         {latesPost.map((post) => (
           <li key={post.slug}>

@@ -21,7 +21,9 @@ const Footer = () => {
     <footer className="mb-12">
       <div className="flex items-end justify-between">
         <div className="flex flex-col space-y-4">
-          <h4 className="text-foreground/30">Credits for design inspiration</h4>
+          <h4 className="text-foreground/30 text-sm">
+            Credits for design inspiration
+          </h4>
           <ul className="md:flex md:gap-3">
             {credtis.map((credit) => (
               <li key={credit.web}>

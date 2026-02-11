@@ -1,5 +1,6 @@
 import { PageContainer } from "@/components/PageContainer";
-import { MovieReviews } from "@/components/sections";
+import { SectionContainer } from "@/components/SectionContainer";
+import { MovieReviews } from "@/components/MovieReviews";
 import { allMovieReviewPosts } from "content-collections";
 import { getMovies } from "@/lib/tmdb";
 import { sortMovies } from "@/lib/utils";
@@ -9,8 +10,15 @@ const AllMoviesPage = async () => {
   const movies = sortMovies(await getMovies(movieIds));
   return (
     <PageContainer>
-      <h1>Movies</h1>
-      <MovieReviews movies={movies} />
+      <SectionContainer>
+        <div className="flex flex-col space-y-2">
+          <h1 className="font-display text-2xl font-medium">Movie Reviews</h1>
+          <p className="text-muted-foreground">
+            My take on the movies I've watched recently.
+          </p>
+        </div>
+        <MovieReviews movies={movies} />
+      </SectionContainer>
     </PageContainer>
   );
 };

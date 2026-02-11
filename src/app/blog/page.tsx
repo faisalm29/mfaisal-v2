@@ -1,9 +1,8 @@
-import {
-  GeneralPosts,
-  ProgrammingPosts,
-  MovieReviews,
-} from "@/components/sections";
+import { GeneralPosts } from "@/components/GeneralPosts";
+import { ProgrammingPosts } from "@/components/ProgrammingPosts";
+import { MovieReviews } from "@/components/MovieReviews";
 import { PageContainer } from "@/components/PageContainer";
+import { SectionContainer } from "@/components/SectionContainer";
 import {
   allGeneralPosts,
   allProgrammingPosts,
@@ -19,13 +18,37 @@ const PostPage = async () => {
   const movies = sortMovies(await getMovies(movieIds)).slice(0, 5);
   return (
     <PageContainer>
-      <h1>Blog</h1>
-      <GeneralPosts generalPosts={sortedGeneralPosts} viewMorebutton />
-      <ProgrammingPosts
-        programmingPosts={sortedProgrammingPosts}
-        viewMoreButton
-      />
-      <MovieReviews movies={movies} viewMoreButton />
+      <h1 className="font-display text-2xl font-medium">Blog</h1>
+      <SectionContainer>
+        <div className="flex flex-col space-y-2">
+          <h2 className="font-display text-xl font-medium">General</h2>
+          <p className="text-muted-foreground">
+            Writings about anything except programming.
+          </p>
+        </div>
+        <GeneralPosts generalPosts={sortedGeneralPosts} viewMorebutton />
+      </SectionContainer>
+      <SectionContainer>
+        <div className="flex flex-col space-y-2">
+          <h2 className="font-display text-xl font-medium">Programming</h2>
+          <p className="text-muted-foreground">
+            Writings specifically about programming
+          </p>
+        </div>
+        <ProgrammingPosts
+          programmingPosts={sortedProgrammingPosts}
+          viewMoreButton
+        />
+      </SectionContainer>
+      <SectionContainer>
+        <div className="flex flex-col space-y-2">
+          <h2 className="font-display text-xl font-medium">Movie Reviews</h2>
+          <p className="text-muted-foreground">
+            My take on the movies I've watched recently.
+          </p>
+        </div>
+        <MovieReviews movies={movies} viewMoreButton />
+      </SectionContainer>
     </PageContainer>
   );
 };

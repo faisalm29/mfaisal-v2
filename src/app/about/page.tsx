@@ -10,7 +10,7 @@ const AboutPage = () => {
   return (
     <PageContainer>
       <div>
-        <h1>About</h1>
+        <h1 className="font-display text-2xl font-medium">About</h1>
         <p className="text-muted-foreground">
           About me, this blog, and anything related.
         </p>

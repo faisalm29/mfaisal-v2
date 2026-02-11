@@ -4,7 +4,7 @@ import { CustomLink } from "../CustomLink";
 const Summary = ({ ...props }: React.ComponentProps<"section">) => {
   return (
     <section {...props}>
-      <p className="text-muted-foreground">
+      <p className="text-muted-foreground leading-relaxed">
         I created this blog as a record and to implement the learning that I
         have gone through on web development. My journey in learning web
         development and what I am adding to this blog can be found in the{" "}

@@ -21,7 +21,7 @@ const contacts = [
 const Contacts = () => {
   return (
     <SectionContainer>
-      <h2>Connect with Me</h2>
+      <h2 className="font-display text-xl font-medium">Connect with Me</h2>
       <ul className="flex items-center justify-between gap-2">
         {contacts.map((contact) => (
           <li key={contact.url} className="w-full">

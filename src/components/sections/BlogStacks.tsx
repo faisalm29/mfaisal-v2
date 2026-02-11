@@ -55,7 +55,9 @@ const stacks = [
 const BlogStacks = () => {
   return (
     <SectionContainer>
-      <h2>This Blog Core Stacks</h2>
+      <h2 className="font-display text-xl font-medium">
+        This Blog Core Stacks
+      </h2>
       <ul className="flex flex-wrap items-center gap-2">
         {stacks.map((stack) => (
           <li key={stack.website}>

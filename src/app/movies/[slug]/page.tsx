@@ -45,7 +45,7 @@ export async function generateMetadata({
         {
           url: movie.movie_details.poster_path
             ? `https://image.tmdb.org/t/p/w500${movie.movie_details.poster_path}`
-            : "/og-image.jpg",
+            : "/opengraph-image.jpg",
           alt: movie.movie_details.poster_path
             ? `${movie.movie_details.title}'s movie poster`
             : `${movie.movie_details.title}'s movie poster`,
@@ -65,7 +65,7 @@ export async function generateMetadata({
         {
           url: movie.movie_details.poster_path
             ? `https://image.tmdb.org/t/p/w500${movie.movie_details.poster_path}`
-            : "/og-image.jpg",
+            : "/opengraph-image.jpg",
           alt: movie.movie_details.poster_path
             ? `${movie.movie_details.title}'s movie poster`
             : `${movie.movie_details.title}'s movie poster`,

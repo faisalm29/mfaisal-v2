@@ -33,7 +33,7 @@ export async function generateMetadata({
       description: post.excerpt,
       images: [
         {
-          url: post.thumbnail?.src || "/og-image.jpg",
+          url: post.thumbnail?.src || "/opengraph-image.jpg",
           alt: post.thumbnail?.alt || `${post.title}'s cover thumbnail image.`,
         },
       ],
@@ -49,7 +49,7 @@ export async function generateMetadata({
       creator: "@hrrblealtruist",
       images: [
         {
-          url: post.thumbnail?.src || "/og-image.jpg",
+          url: post.thumbnail?.src || "/opengraph-image.jpg",
           alt: post.thumbnail?.alt || `${post.title}'s cover thumbnail image.`,
           username: "@hrrblealtruist",
         },

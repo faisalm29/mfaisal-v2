@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "Faisal M.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/opengraph-image.jpg",
         alt: "Faisal M's Blog",
       },
     ],
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     creator: "@hrrblealtruist",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/opengraph-image.jpg",
         alt: "Faisal M's Blog",
       },
     ],
